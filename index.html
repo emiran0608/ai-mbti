@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#211044">
+<meta name="description" content="10가지 질문으로 나에게 어울리는 AI 도구와 AI 도구 MBTI를 찾아보세요.">
+<title>AI MBTI — 나에게 맞는 AI 찾기</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+:root{--ink:#211044;--purple:#37145f;--pink:#ef3d91;--pink2:#ff7ab7;--lav:#eee6fa;--paper:#fffaff;--muted:#6e617e;--line:#e6d9f0;--white:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:'Nanum Gothic',sans-serif;line-height:1.65}button,input{font:inherit}button{cursor:pointer}.shell{max-width:1120px;margin:auto;padding:0 24px}.topbar{display:flex;align-items:center;justify-content:space-between;padding:22px 0}.brand{font-weight:800;letter-spacing:-.04em;font-size:1.2rem}.brand b{color:var(--pink)}.top-tag{border:1px solid var(--line);padding:6px 12px;border-radius:999px;color:var(--muted);font-size:.78rem}
+.hero{position:relative;overflow:hidden;border-radius:30px;background:linear-gradient(135deg,#261047 0%,#43136b 58%,#811a70 100%);color:white;padding:clamp(30px,6vw,70px);display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:28px;min-height:410px}.eyebrow{color:#ff9acb;font-weight:800;letter-spacing:.12em;font-size:.78rem}.hero h1{font-size:clamp(2.3rem,5vw,4.3rem);line-height:1.14;letter-spacing:-.065em;margin:15px 0}.hero h1 em{font-style:normal;color:#ff6fb0}.hero p{color:#e6d9f7;max-width:500px;margin:0 0 26px}.btn{border:0;border-radius:14px;padding:13px 20px;font-weight:800;transition:transform .2s,box-shadow .2s}.btn:hover{transform:translateY(-2px)}.btn-primary{background:linear-gradient(100deg,#ff5aa7,#ee3a91);color:white;box-shadow:0 10px 25px #e83a9138}.btn-light{background:white;color:var(--purple)}.hero-art{width:100%;max-width:360px;justify-self:center}.hero-art svg{width:100%;height:auto;filter:drop-shadow(0 20px 25px #10051e55)}.section{padding:56px 0}.section-head{display:flex;justify-content:space-between;gap:16px;align-items:end;margin-bottom:24px}.section-head h2{font-size:clamp(1.6rem,3vw,2.2rem);letter-spacing:-.05em;margin:0}.section-head p{margin:5px 0 0;color:var(--muted);font-size:.92rem}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.step{background:white;border:1px solid var(--line);border-radius:18px;padding:20px}.step-num{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:var(--lav);color:var(--pink);font-weight:800}.step h3{margin:10px 0 4px;font-size:1rem}.step p{margin:0;color:var(--muted);font-size:.88rem}
+.quiz-wrap{background:white;border:1px solid var(--line);border-radius:26px;padding:clamp(20px,4vw,38px);box-shadow:0 18px 50px #37145f0b}.quiz-top{display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--muted);font-size:.86rem}.progress{height:7px;background:#f0e8f7;border-radius:99px;overflow:hidden;margin:13px 0 30px}.progress span{display:block;height:100%;width:10%;background:linear-gradient(90deg,var(--purple),var(--pink));transition:width .25s}.question{font-size:clamp(1.25rem,2.5vw,1.8rem);letter-spacing:-.04em;margin:0 0 8px}.hint{color:var(--muted);margin:0 0 22px;font-size:.92rem}.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}.answer{background:#fffaff;border:1.5px solid var(--line);border-radius:16px;padding:17px;text-align:left;display:flex;gap:12px;align-items:flex-start;color:var(--ink);min-height:88px}.answer:hover{border-color:#d36aa8;background:#fff4fa}.answer.selected{border-color:var(--pink);background:#fff0f7;box-shadow:0 0 0 2px #ef3d911c}.answer .letter{flex:0 0 30px;height:30px;border-radius:10px;display:grid;place-items:center;background:var(--lav);color:var(--purple);font-weight:800}.answer.selected .letter{background:var(--pink);color:white}.answer strong{display:block;margin-bottom:3px}.answer small{color:var(--muted);font-size:.82rem;line-height:1.45;display:block}.quiz-actions{display:flex;justify-content:space-between;align-items:center;margin-top:24px;gap:12px}.btn-outline{background:white;border:1px solid var(--line);color:var(--purple)}button:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.result{display:none}.result.show{display:block;animation:rise .45s ease both}@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}.result-hero{background:linear-gradient(135deg,#251044,#50156c 60%,#8c1c70);color:white;border-radius:28px;padding:clamp(24px,5vw,48px);display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}.result-hero h2{font-size:clamp(2rem,4vw,3.4rem);margin:8px 0;letter-spacing:-.06em}.result-hero p{color:#e9dff5;max-width:620px}.type-chip{display:inline-block;background:#ffffff1c;border:1px solid #ffffff3d;border-radius:999px;padding:6px 12px;font-weight:800;color:#ffb6d7}.type-code{font-size:clamp(2.5rem,5vw,4.5rem);font-weight:800;color:#ff78b7;letter-spacing:-.07em}.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}.panel{background:white;border:1px solid var(--line);border-radius:22px;padding:24px}.panel h3{margin:0 0 12px;letter-spacing:-.03em}.panel p{color:var(--muted);margin:0}.trait-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.trait{background:#f3eafa;border-radius:999px;padding:6px 10px;font-size:.82rem;font-weight:700}.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.tool-card{background:white;border:1px solid var(--line);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:10px}.tool-icon{width:48px;height:48px;border-radius:15px;background:linear-gradient(135deg,#eee3ff,#ffe0ef);display:grid;place-items:center;color:var(--purple);font-size:1.25rem;font-weight:800}.tool-card h3{margin:0;font-size:1.08rem}.tool-card p{margin:0;color:var(--muted);font-size:.88rem}.tool-mbti{align-self:flex-start;background:#2d124c;color:white;border-radius:8px;padding:4px 9px;font-weight:800;font-size:.78rem}.tool-card a{color:#bd2678;font-weight:800;font-size:.88rem;text-decoration:none;margin-top:auto;padding-top:8px}.tool-card a:hover{text-decoration:underline}.fit-label{font-size:.75rem;color:#a02d73;font-weight:800;letter-spacing:.08em}.note{color:var(--muted);font-size:.82rem;margin-top:18px}.bar-row{display:grid;grid-template-columns:95px 1fr 38px;gap:10px;align-items:center;margin:10px 0;font-size:.85rem}.bar{height:8px;border-radius:99px;background:#f0e7f6;overflow:hidden}.bar span{height:100%;display:block;background:linear-gradient(90deg,#57218a,#f1449a);border-radius:99px}.footer{padding:30px 0 45px;border-top:1px solid var(--line);color:var(--muted);font-size:.82rem}.footer-inner{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}.hide{display:none!important}
+@media(max-width:760px){.hero{grid-template-columns:1fr;text-align:center}.hero p{margin-left:auto;margin-right:auto}.hero-art{max-width:220px;grid-row:1}.steps{grid-template-columns:1fr}.answers{grid-template-columns:1fr}.result-hero{grid-template-columns:1fr}.type-code{font-size:3rem}.result-grid{grid-template-columns:1fr}.tools-grid{grid-template-columns:1fr}.section-head{align-items:start;flex-direction:column}.shell{padding:0 16px}.topbar{padding:16px 0}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="shell topbar">
+  <div class="brand">AI <b>MBTI</b> ✦</div>
+  <div class="top-tag">10 QUESTIONS · FIND YOUR AI MATCH</div>
+</header>
+<main class="shell">
+<section class="hero" id="home">
+  <div>
+    <div class="eyebrow">YOUR AI PERSONALITY TEST</div>
+    <h1>내 일에 맞는 AI,<br><em>MBTI처럼</em> 찾아봐!</h1>
+    <p>AI를 쓰려는 목적과 일하는 방식을 알려주세요. 10개의 질문에 답하면 어울리는 AI 도구와 재미로 보는 AI MBTI를 추천해 드려요.</p>
+    <button class="btn btn-primary" id="startBtn">내 AI 유형 찾기 <span aria-hidden="true">↗</span></button>
+  </div>
+  <div class="hero-art" aria-label="보라색과 분홍색의 추상 AI 캐릭터 일러스트">
+  <svg viewBox="0 0 340 310" role="img" aria-labelledby="artTitle">
+    <title id="artTitle">AI 성격을 상징하는 별과 말풍선 그림</title>
+    <defs><linearGradient id="orb" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff83bd"/><stop offset="1" stop-color="#9d5bff"/></linearGradient><linearGradient id="card" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff" stop-opacity=".96"/><stop offset="1" stop-color="#f4d9ff" stop-opacity=".95"/></linearGradient></defs>
+    <circle cx="170" cy="150" r="105" fill="#ffffff" opacity=".06"/><circle cx="170" cy="150" r="83" fill="#ffffff" opacity=".06"/>
+    <path d="M40 94l8 18 19 3-14 13 3 19-16-9-17 9 4-19-14-13 19-3z" fill="#ff6db3"/><path d="M285 43l6 14 15 2-11 10 3 15-13-7-13 7 3-15-11-10 15-2z" fill="#b99aff"/>
+    <g transform="translate(75 58) rotate(-8 95 100)"><rect x="20" y="12" width="174" height="204" rx="28" fill="url(#card)"/><rect x="38" y="31" width="138" height="110" rx="18" fill="#2c124c"/><circle cx="81" cy="79" r="10" fill="#ff80bd"/><circle cx="134" cy="79" r="10" fill="#ff80bd"/><path d="M87 105q20 18 40 0" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/><path d="M105 22v-15m-7 0h14" stroke="#ff8cc4" stroke-width="5" stroke-linecap="round"/><rect x="42" y="159" width="130" height="9" rx="5" fill="#d9c5ed"/><rect x="42" y="178" width="88" height="9" rx="5" fill="#f6b6d5"/><circle cx="168" cy="192" r="7" fill="#ee3d91"/></g>
+    <circle cx="268" cy="206" r="28" fill="url(#orb)"/><path d="M259 206l7 7 13-16" fill="none" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M43 224q28-28 52 0t49 0" fill="none" stroke="#ff80bd" stroke-width="4" stroke-linecap="round" opacity=".9"/><circle cx="60" cy="264" r="5" fill="#b99aff"/><circle cx="285" cy="112" r="5" fill="#ff9bc9"/>
+  </svg>
+  </div>
+</section>
+<section class="section">
+  <div class="section-head"><div><h2>어떻게 진행되나요?</h2><p>정답은 없어요. 지금 가장 자주 하고 싶은 일을 떠올려 보세요.</p></div></div>
+  <div class="steps">
+    <article class="step"><div class="step-num">01</div><h3>10개 질문에 답하기</h3><p>업무 목적, 창작 방식, 정보 탐색 취향을 골라요.</p></article>
+    <article class="step"><div class="step-num">02</div><h3>나의 AI 사용 성향 확인</h3><p>답변을 바탕으로 네 가지 축과 추천 유형을 살펴봐요.</p></article>
+    <article class="step"><div class="step-num">03</div><h3>추천 AI 비교하기</h3><p>용도별 도구, 가상의 AI MBTI, 공식 사이트를 한 화면에서 확인해요.</p></article>
+  </div>
+</section>
+<section class="section" id="quiz">
+  <div class="section-head"><div><h2>나의 AI 사용 성향 테스트</h2><p>가장 나다운 답 하나를 선택하세요.</p></div></div>
+  <div class="quiz-wrap" id="quizBox">
+    <div class="quiz-top"><span id="questionCount">QUESTION 01 / 10</span><span id="progressText">10% 완료</span></div>
+    <div class="progress" aria-label="질문 진행도"><span id="progressBar"></span></div>
+    <h3 class="question" id="questionText">AI에게 가장 먼저 맡기고 싶은 일은?</h3>
+    <p class="hint" id="questionHint">가장 자주 할 것 같은 일을 골라주세요.</p>
+    <div class="answers" id="answers" role="group" aria-label="답변 선택"></div>
+    <div class="quiz-actions"><button class="btn btn-outline" id="prevBtn" disabled>← 이전</button><button class="btn btn-primary" id="nextBtn" disabled>다음 질문 →</button></div>
+  </div>
+</section>
+<section class="section result" id="results" aria-live="polite">
+  <div class="section-head"><div><h2>당신의 AI 매칭 결과</h2><p>답변에 따른 추천이며, AI MBTI는 이해를 돕기 위한 비공식 비유예요.</p></div></div>
+  <div class="result-hero">
+    <div><span class="type-chip" id="typeChip">THE CREATIVE EXPLORER</span><h2 id="resultTitle">아이디어를 현실로 만드는 탐험가</h2><p id="resultDesc"></p><div class="trait-list" id="resultTraits"></div></div>
+    <div class="type-code" id="typeCode">ENFP</div>
+  </div>
+  <div class="result-grid">
+    <article class="panel"><h3>나의 성향 점수</h3><div id="scoreBars"></div><p class="note">점수는 이번 답변 안에서 상대적으로 나타난 선호예요. 성격이나 능력을 진단하지 않아요.</p></article>
+    <article class="panel"><h3>이렇게 활용해 보세요</h3><p id="usageAdvice"></p><div class="trait-list" id="workflowTags"></div></article>
+  </div>
+  <div class="section-head" style="margin-top:34px"><div><h2>추천 AI 도구 TOP 3</h2><p>하나만 고집하기보다 작업에 맞춰 조합해 쓰면 좋아요.</p></div></div>
+  <div class="tools-grid" id="toolCards"></div>
+  <p class="note">※ 서비스의 기능·가격·지원 범위는 바뀔 수 있어요. 아래 MBTI는 공식 성격 유형이 아니라 도구의 대표적 사용 방식에서 착안한 편집 콘텐츠입니다. 민감한 정보나 비공개 자료를 입력하기 전에는 각 서비스의 개인정보 정책을 확인하세요.</p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:24px"><button class="btn btn-primary" id="retryBtn">다시 테스트하기 ↻</button><button class="btn btn-outline" id="copyBtn">결과 요약 복사</button></div>
+</section>
+</main>
+<footer class="shell footer"><div class="footer-inner"><span><strong>AI MBTI</strong> · Find your way to work with AI</span><span>Single-page demo · GitHub Pages ready · © 2026</span></div><p>본 페이지는 교육·탐색용 예시입니다. AI 도구의 MBTI 표기는 공식 분류가 아니며, 추천은 답변 기반의 간단한 규칙으로 계산됩니다.</p></footer>
+<script>
+const questions=[
+ {q:"AI에게 가장 먼저 맡기고 싶은 일은?",hint:"가장 자주 할 것 같은 일을 골라주세요.",a:[["글쓰기·아이디어","기획, 글 초안, 새로운 발상", {C:2}],["자료 조사·요약","긴 문서 읽기, 비교, 핵심 정리",{R:2}],["업무 자동화·코딩","코드 작성, 데이터 처리, 반복 작업",{T:2}],["이미지·영상 만들기","그림, 디자인, 콘텐츠 제작",{V:2}]]},
+ {q:"결과물을 받을 때 가장 중요한 것은?",hint:"여러 기준이 다 중요해도 하나만 골라요.",a:[["빠르고 간단한 답","바로 쓸 수 있는 요약과 초안",{S:2}],["근거와 출처","검토할 수 있는 정보와 논리",{R:2}],["독창적인 표현","눈에 띄는 아이디어와 분위기",{C:2}],["정확한 실행","요구사항에 맞는 코드·절차",{T:2}]]},
+ {q:"새로운 프로젝트를 시작한다면?",hint:"처음 한 시간의 모습을 상상해 보세요.",a:[["생각나는 대로 브레인스토밍","가능성을 넓게 펼친 뒤 고르기",{C:2}],["목표와 단계부터 정리","할 일 목록과 일정부터 만들기",{S:2}],["사례와 데이터를 조사","비슷한 사례와 근거 찾기",{R:2}],["작은 시제품부터 제작","직접 만들며 빠르게 실험하기",{T:2}]]},
+ {q:"AI와 대화할 때 선호하는 방식은?",hint:"편한 협업 스타일을 골라요.",a:[["친근하게 주고받기","아이디어를 함께 발전시키기",{C:1,S:1}],["구조적으로 요청하기","조건과 출력 형식을 명확히 전달",{T:1,R:1}],["자료를 첨부하고 질문","문서·파일을 바탕으로 답 얻기",{R:2}],["이미지나 예시로 설명","보여주며 원하는 결과 조정하기",{V:2}]]},
+ {q:"가장 자주 다루게 될 자료는?",hint:"개인 취미와 학교·업무를 모두 생각해도 좋아요.",a:[["문서·웹페이지·PDF","긴 내용을 읽고 정리하기",{R:2}],["표·데이터·코드","계산, 분석, 기술적 문제 해결",{T:2}],["사진·그래픽·영상","시각적인 결과물 만들기",{V:2}],["메모·초안·발상","아이디어를 글과 계획으로 발전",{C:2}]]},
+ {q:"답변이 마음에 들지 않을 때는?",hint:"실제로 할 법한 행동을 선택하세요.",a:[["다른 관점으로 다시 요청","새로운 방향과 대안을 찾아보기",{C:2}],["근거를 대조해 확인","출처와 사실 여부를 검증하기",{R:2}],["조건을 더 구체적으로 제시","형식·단계·제약을 명확히 하기",{S:2}],["직접 수정하거나 실행","결과를 테스트하며 고치기",{T:2}]]},
+ {q:"어떤 결과물이 가장 반가울까요?",hint:"완성된 결과의 모습을 떠올려 보세요.",a:[["설득력 있는 보고서","요약, 비교표, 참고자료",{R:1,S:1}],["매력적인 콘텐츠","브랜드 문구, 스토리, 이미지",{C:1,V:1}],["작동하는 도구","스크립트, 앱, 자동화 흐름",{T:2}],["깔끔한 실행 계획","우선순위, 체크리스트, 일정",{S:2}]]},
+ {q:"AI를 얼마나 깊게 활용하고 싶나요?",hint:"지금의 관심과 현실적인 사용량을 기준으로 해요.",a:[["필요할 때 간단하게","쉬운 대화형 도구부터",{S:2}],["여러 도구를 연결해서","검색·문서·기획을 조합",{R:1,T:1}],["설정을 조정하며 깊게","복잡한 작업도 직접 제어",{T:2}],["새 기능을 다양하게 실험","새로운 형식과 창작을 탐색",{C:1,V:1}]]},
+ {q:"AI가 꼭 도와줬으면 하는 순간은?",hint:"요즘 가장 막히는 순간을 생각해 보세요.",a:[["무엇부터 할지 막막할 때","아이디어와 시작점을 찾기",{C:2}],["정보가 너무 많을 때","긴 자료를 압축하고 비교",{R:2}],["반복 작업이 귀찮을 때","작업을 자동화하고 오류 줄이기",{T:2}],["표현이 잘 안 될 때","이미지·문장·레이아웃 다듬기",{V:2}]]},
+ {q:"AI를 잘 썼다고 느끼는 기준은?",hint:"마지막으로 가장 중요한 기준을 골라요.",a:[["생각하지 못한 선택지를 얻었다","새로운 관점과 창의성",{C:2}],["믿을 만한 결론에 도달했다","정확성, 출처, 이해",{R:2}],["시간과 수고를 줄였다","효율과 재사용 가능성",{S:2}],["직접 결과를 완성했다","실행력과 기술적 성취",{T:2}]]}
+];
+const tools={
+ chatgpt:{name:"ChatGPT",mbti:"ENFP",icon:"✦",desc:"브레인스토밍부터 글쓰기, 이미지·데이터 작업까지 폭넓게 대화하며 진행하는 범용 파트너.",url:"https://chatgpt.com/",tags:["범용 대화","초안·기획","멀티모달"],fit:["C","S"]},
+ claude:{name:"Claude",mbti:"INFJ",icon:"❋",desc:"긴 문서 읽기, 글 다듬기, 복잡한 내용을 차분하게 구조화하는 작업에 잘 어울리는 도구.",url:"https://claude.ai/",tags:["긴 문서","글쓰기","분석"],fit:["R","C"]},
+ gemini:{name:"Google Gemini",mbti:"ENTP",icon:"✧",desc:"아이디어 탐색과 멀티모달 작업을 지원하며 Google 생태계를 함께 쓰는 경우 살펴볼 만한 도구.",url:"https://gemini.google.com/",tags:["아이디어","멀티모달","Google 연계"],fit:["C","V"]},
+ perplexity:{name:"Perplexity",mbti:"INTP",icon:"⌕",desc:"웹에서 정보를 찾아 출처와 함께 살펴보는 조사·리서치 중심 작업에 어울리는 도구.",url:"https://www.perplexity.ai/",tags:["웹 조사","출처 확인","비교"],fit:["R","S"]},
+ copilot:{name:"Microsoft Copilot",mbti:"ESTJ",icon:"▦",desc:"Microsoft 환경에서 문서·생산성 작업을 지원하는 AI 도우미. 실제 기능은 계정과 라이선스에 따라 달라질 수 있어요.",url:"https://copilot.microsoft.com/",tags:["생산성","문서 작업","업무 보조"],fit:["S","T"]},
+ cursor:{name:"Cursor",mbti:"ISTP",icon:"⌘",desc:"코드베이스를 이해하고 코드 작성·수정 흐름을 돕는 AI 중심 코드 에디터.",url:"https://cursor.com/",tags:["코딩","디버깅","개발"],fit:["T","S"]},
+ midjourney:{name:"Midjourney",mbti:"ISFP",icon:"◈",desc:"텍스트 프롬프트를 바탕으로 콘셉트 아트와 시각적 이미지를 탐색할 때 활용하는 이미지 생성 도구.",url:"https://www.midjourney.com/",tags:["이미지 생성","무드보드","콘셉트"],fit:["V","C"]},
+ canva:{name:"Canva Magic Studio",mbti:"ESFP",icon:"▧",desc:"프레젠테이션과 소셜 콘텐츠 등 시각 자료를 만들고 편집하는 디자인 작업에 어울려요.",url:"https://www.canva.com/magic-studio/",tags:["디자인","발표 자료","콘텐츠"],fit:["V","S"]},
+ notebooklm:{name:"NotebookLM",mbti:"ISTJ",icon:"▤",desc:"제공한 자료를 중심으로 질문하고 요약·학습 자료를 구성할 때 유용한 도구.",url:"https://notebooklm.google.com/",tags:["내 자료 기반","요약","학습"],fit:["R","S"]}
+};
+const profiles={
+ C:{title:"아이디어를 넓히는 크리에이터",code:"ENFP",chip:"THE CREATIVE EXPLORER",desc:"새로운 가능성을 발견하고 대화로 생각을 발전시키는 스타일이에요. 완벽한 첫 답보다 좋은 출발점과 다양한 선택지를 얻을 때 AI의 장점을 잘 살릴 수 있어요.",traits:["브레인스토밍","창의적 시도","대화형 협업"],advice:"먼저 AI에게 대안을 5개 정도 요청하고, 마음에 드는 방향을 고른 뒤 대상·톤·분량을 구체화해 보세요. 사실 확인이 필요한 내용은 별도로 검증하세요.",workflow:["아이디어 확장","초안 작성","피드백 반복"]},
+ R:{title:"근거를 찾는 리서치 분석가",code:"INTP",chip:"THE EVIDENCE SEEKER",desc:"정보를 비교하고 핵심 근거를 파악한 뒤 판단하는 데 무게를 두는 스타일이에요. 출처가 분명한 답과 자료 기반의 분석을 중요하게 여겨요.",traits:["근거 중심","비교·요약","논리적 검토"],advice:"문서나 웹 자료를 먼저 모은 뒤 핵심 주장·근거·불확실한 점을 표로 정리해 달라고 요청하세요. 중요한 결론은 원문 출처에서 직접 확인하세요.",workflow:["자료 모으기","출처 대조","요약·비교"]},
+ T:{title:"문제를 해결하는 빌더",code:"ISTP",chip:"THE PRACTICAL BUILDER",desc:"아이디어를 실제 결과물로 구현하고 문제를 직접 해결하는 데 관심이 큰 스타일이에요. 코드·데이터·자동화처럼 실행 결과를 확인할 수 있는 작업에 잘 맞아요.",traits:["실행 중심","문제 해결","반복 개선"],advice:"목표와 제약조건을 먼저 제시하고 작은 단계로 나눠 진행하세요. 코드나 자동화 결과는 실제 환경에서 테스트하고, 중요한 파일은 백업해 두세요.",workflow:["작업 분해","작게 구현","테스트·수정"]},
+ V:{title:"감각을 시각화하는 디자이너",code:"ISFP",chip:"THE VISUAL STORYTELLER",desc:"글만으로 설명하기보다 이미지와 레이아웃, 분위기처럼 눈에 보이는 결과를 통해 생각을 발전시키는 스타일이에요.",traits:["시각적 표현","콘셉트 탐색","디자인 감각"],advice:"원하는 분위기·색상·대상·사용처를 함께 적고, 결과를 한 번에 확정하기보다 여러 시안을 비교하며 다듬어 보세요. 사용 권리와 생성물 표시 정책도 확인하세요.",workflow:["레퍼런스 정리","시안 비교","디자인 다듬기"]},
+ S:{title:"흐름을 정리하는 생산성 플래너",code:"ESTJ",chip:"THE EFFICIENT ORGANIZER",desc:"복잡한 일을 단계와 우선순위로 정리해 실제로 처리 가능한 형태로 만드는 스타일이에요. 명확한 출력 형식과 반복 가능한 절차를 선호해요.",traits:["구조화","시간 절약","실행 계획"],advice:"원하는 결과 형식과 제한사항을 먼저 적고, 체크리스트·표·단계별 계획으로 출력해 달라고 해 보세요. 반복 업무는 결과를 확인한 뒤 재사용 템플릿으로 만들어 보세요.",workflow:["우선순위 정하기","표·체크리스트","템플릿화"]}
+};
+let index=0,answers=Array(questions.length).fill(null);
+const $=id=>document.getElementById(id);
+function renderQuestion(){const q=questions[index];$("questionCount").textContent=`QUESTION ${String(index+1).padStart(2,"0")} / ${questions.length}`;$("progressText").textContent=`${Math.round((index+1)/questions.length*100)}% 완료`;$("progressBar").style.width=`${(index+1)/questions.length*100}%`;$("questionText").textContent=q.q;$("questionHint").textContent=q.hint;$("answers").innerHTML="";
+q.a.forEach((a,i)=>{const b=document.createElement("button");b.type="button";b.className="answer"+(answers[index]===i?" selected":"");b.setAttribute("aria-pressed",answers[index]===i?"true":"false");b.innerHTML=`<span class="letter">${String.fromCharCode(65+i)}</span><span><strong></strong><small></small></span>`;b.querySelector("strong").textContent=a[0];b.querySelector("small").textContent=a[1];b.addEventListener("click",()=>{answers[index]=i;renderQuestion()});$("answers").appendChild(b)});
+$("prevBtn").disabled=index===0;$("nextBtn").disabled=answers[index]===null;$("nextBtn").textContent=index===questions.length-1?"결과 확인하기 ✦":"다음 질문 →";
+}
+function calc(){const s={C:0,R:0,T:0,V:0,S:0};answers.forEach((ans,i)=>{const obj=questions[i].a[ans][2];Object.entries(obj).forEach(([k,v])=>s[k]+=v)});return s}
+function recommend(s){return Object.keys(s).sort((a,b)=>s[b]-s[a])[0]}
+function renderResult(){const s=calc();const primary=recommend(s),p=profiles[primary];$("typeChip").textContent=p.chip;$("resultTitle").textContent=p.title;$("resultDesc").textContent=p.desc;$("typeCode").textContent=p.code;$("resultTraits").innerHTML=p.traits.map(t=>`<span class="trait">${t}</span>`).join("");$("usageAdvice").textContent=p.advice;$("workflowTags").innerHTML=p.workflow.map(t=>`<span class="trait">${t}</span>`).join("");
+const max=Math.max(...Object.values(s),1);const labels={C:"창의·아이디어",R:"리서치·근거",T:"기술·실행",V:"시각·창작",S:"구조·효율"};$("scoreBars").innerHTML=Object.entries(labels).map(([k,l])=>`<div class="bar-row"><span>${l}</span><div class="bar"><span style="width:${Math.round(s[k]/max*100)}%"></span></div><strong>${s[k]}</strong></div>`).join("");
+const ranked=Object.entries(tools).map(([k,t])=>({k,...t,score:t.fit.reduce((sum,f)=>sum+(s[f]||0),0)+(t.fit.includes(primary)?1:0)})).sort((a,b)=>b.score-a.score).slice(0,3);
+$("toolCards").innerHTML=ranked.map((t,i)=>`<article class="tool-card"><span class="fit-label">MATCH ${String(i+1).padStart(2,"0")} · 추천</span><div class="tool-icon" aria-hidden="true">${t.icon}</div><h3>${t.name}</h3><span class="tool-mbti">가상 AI MBTI · ${t.mbti}</span><p>${t.desc}</p><div class="trait-list">${t.tags.map(tag=>`<span class="trait">${tag}</span>`).join("")}</div><a href="${t.url}" target="_blank" rel="noopener noreferrer">공식 사이트 방문 ↗</a></article>`).join("");
+$("results").classList.add("show");$("results").scrollIntoView({behavior:"smooth",block:"start"});window.lastResult={profile:p,s,ranked};}
+$("startBtn").addEventListener("click",()=>{$("quiz").scrollIntoView({behavior:"smooth"});renderQuestion()});
+$("prevBtn").addEventListener("click",()=>{if(index>0){index--;renderQuestion()}});
+$("nextBtn").addEventListener("click",()=>{if(answers[index]===null)return;if(index<questions.length-1){index++;renderQuestion()}else renderResult()});
+$("retryBtn").addEventListener("click",()=>{index=0;answers=Array(questions.length).fill(null);$("results").classList.remove("show");renderQuestion();$("quiz").scrollIntoView({behavior:"smooth"})});
+$("copyBtn").addEventListener("click",async()=>{const r=window.lastResult;if(!r)return;const txt=`AI MBTI 결과: ${r.profile.title} (${r.profile.code})\n${r.profile.desc}\n추천 AI: ${r.ranked.map(t=>`${t.name} — 가상 MBTI ${t.mbti}`).join(", ")}\n※ AI MBTI는 공식 분류가 아닌 재미를 위한 비유입니다.`;try{await navigator.clipboard.writeText(txt);$("copyBtn").textContent="복사 완료 ✓"}catch(e){const ta=document.createElement("textarea");ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand("copy");ta.remove();$("copyBtn").textContent="복사 완료 ✓"}});
+renderQuestion();
+</script>
+</body>
+</html>
